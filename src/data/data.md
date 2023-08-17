@@ -1,0 +1,3 @@
+Hi, my name is {{placeholder}}. In 2012, I began my journey into software development, and it's been a rewarding adventure ever since. I started with the .Net framework and Angular, consistently delivering solid and efficient solutions. Alongside these, TypeScript has been a valuable tool, ensuring my code is both reliable and well-structured.
+
+Outside of coding, I have a genuine passion for 3D modeling and design as a hobby. This creative endeavor allows me to blend the precision of technology with the freedom of artistic expression. Recently, I've been exploring the capabilities of Next.js, keeping up with the latest trends in web app development. Through every endeavor, my aim is to deliver excellence and make a lasting impression on the world.
