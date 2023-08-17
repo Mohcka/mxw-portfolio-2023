@@ -24,6 +24,9 @@ export default function Home() {
           <Contact />
         </div>
       </div>
+      <Suspense fallback={<div>loading...</div>}>
+        <Cgi />
+      </Suspense>
     </>
   );
 }
