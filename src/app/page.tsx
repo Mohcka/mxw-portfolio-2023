@@ -1,5 +1,3 @@
-"use client";
-
 import About from "@/components/about";
 import Cgi from "@/components/cgi";
 import Contact from "@/components/contact";
@@ -26,9 +24,6 @@ export default function Home() {
           <Contact />
         </div>
       </div>
-      <Suspense fallback={<div>loading...</div>}>
-        <Cgi />
-      </Suspense>
     </>
   );
 }
