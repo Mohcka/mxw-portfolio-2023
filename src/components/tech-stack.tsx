@@ -1,9 +1,16 @@
-"use client"
+"use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import DynamicIcon from "@/components/DynamicIcon";
+import { AnimatePresence } from "framer-motion";
 
-const tech = [
+export interface TechItem {
+  name: string;
+  iconUrl: string;
+}
+
+const tech: TechItem[] = [
   {
     name: "React",
     iconUrl: "/react.svg",
@@ -44,14 +51,54 @@ const tech = [
     name: "typescript",
     iconUrl: "/typescript.svg",
   },
+  {
+    name: "api",
+    iconUrl: "/api.svg",
+  },
 ];
 
-export default function Techstack() {
-  const [techSubset, setTechSubset] = useState(tech.slice(0, 10));
-  
-  function techStackCompare(techName1: string, techName2: string) {
-    return techName1.localeCompare(techName2);
+const subsetLength = 10;
+
+export default function TechList() {
+  const [tecListhSubset, setTechListSubset] = useState(
+    tech.slice(0, subsetLength)
+  );
+
+  function techListCompare(techName1: string, techName2: string) {
+    return techName1 === techName2;
   }
+
+  const replaceItemInTechListWithRandom = useCallback(() => {
+    // get the difference between the two arrays
+    const filteredTechList = tech.filter((item) => {
+      return !tecListhSubset.some((techItem) =>
+        techListCompare(techItem.name, item.name)
+      );
+    });
+
+    // do nothing if  there are no more items to add
+    if (filteredTechList.length === 0) return;
+
+    // get a random item from the filtered list
+    const randomItem =
+      filteredTechList[Math.floor(Math.random() * filteredTechList.length)];
+    // choose a random index from the subset to replace
+    const randomIndex = Math.floor(Math.random() * tecListhSubset.length);
+
+    // replace the item at the random index with the random item
+    const newTechListSubset = [...tecListhSubset];
+    newTechListSubset[randomIndex] = randomItem;
+
+    setTechListSubset(newTechListSubset);
+  }, [tecListhSubset]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      replaceItemInTechListWithRandom();
+    }, 3500); // Change image every 3.5 seconds to allow for overlap
+
+    return () => clearInterval(interval);
+  }, [replaceItemInTechListWithRandom]);
 
   return (
     <>
@@ -67,7 +114,7 @@ export default function Techstack() {
             grid 
             max-w-lg 
             grid-cols-4 
-            items-center 
+            place-items-center
             gap-x-8 
             gap-y-10 
             sm:max-w-xl 
@@ -77,17 +124,23 @@ export default function Techstack() {
             lg:max-w-none 
             lg:grid-cols-5"
           >
-            {tech.slice(0, 10).map((item) => (
-              <div key={item.name}>
-                <Image
+            {Array(subsetLength)
+              .fill(0)
+              .map((_, i) => (
+                <div
+                  key={i}
+                  className=" h-20 w-20 col-span-2 max-h-20 object-contain lg:col-span-1 dark:invert"
+                >
+                  {/* <Image
                   src={item.iconUrl}
                   alt={item.name}
                   className="col-span-2 max-h-20 w-full object-contain lg:col-span-1 dark:invert"
                   width={128}
                   height={128}
-                />
-              </div>
-            ))}
+                /> */}
+                  <DynamicIcon iconItem={tecListhSubset[i]} />
+                </div>
+              ))}
           </div>
         </div>
       </div>

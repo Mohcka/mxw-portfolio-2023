@@ -1,13 +1,13 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function Header() {
   return (
-    <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-72">
-      <Image
-        src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply"
-        alt=""
-        className="absolute inset-0 -z-10 h-full w-full object-cover"
-        fill
+    <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-40">
+      <div
+        className="absolute inset-0 -z-10 h-full w-full object-cover bg-slate-500"
       />
       <div
         className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
@@ -35,14 +35,12 @@ export default function Header() {
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            Support center
-          </h2>
-          <p className="mt-6 text-lg leading-8 text-gray-300">
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-            lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-            fugiat aliqua.
-          </p>
+          <motion.h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+            Innovation in Every Iteration
+          </motion.h2>
+          <motion.p className="mt-6 text-lg leading-8 text-gray-300">
+            Pushing boundaries, one project at a time.
+          </motion.p>
         </div>
       </div>
     </div>
