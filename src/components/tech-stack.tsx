@@ -124,7 +124,7 @@ export default function TechList() {
             lg:max-w-none 
             lg:grid-cols-5"
           >
-            {Array(subsetLength)
+            {Array(tecListhSubset.length)
               .fill(0)
               .map((_, i) => (
                 <div
