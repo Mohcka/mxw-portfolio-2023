@@ -2,6 +2,7 @@ import DynamicIcon from "@/components/DynamicIcon";
 import About from "@/components/about";
 import Cgi from "@/components/cgi";
 import Contact from "@/components/contact";
+import Experience from "@/components/experience";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
 import Projects from "@/components/projects";
@@ -25,16 +26,19 @@ export default function Home() {
       </div>
       <div className="py-10">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <Projects />
+          <Experience />
         </div>
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Separator />
       </div>
-      <div className=" py-10">
+      <div className="py-10">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <Contact />
+          <Projects />
         </div>
+      </div>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <Separator />
       </div>
       <Separator />
       <div className=" py-10">

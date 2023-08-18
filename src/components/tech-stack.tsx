@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import DynamicIcon from "@/components/DynamicIcon";
 import { AnimatePresence } from "framer-motion";
 import { techIcons } from "@/data/constants/technologies";
+import Heading from "./heading";
 
 const subsetLength = 10;
 const removeTime = 2000;
@@ -54,9 +55,9 @@ export default function TechList() {
     <>
       <div className=" py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-center text-lg font-semibold leading-8 ">
-            A Developer Who Knows A Libray or Two
-          </h2>
+          <Heading>
+            Broad Knowledge of Some of the Latest and Greatest Technologies
+          </Heading>
           <div
             className="
             mx-auto 

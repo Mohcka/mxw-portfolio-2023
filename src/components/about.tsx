@@ -2,7 +2,13 @@
 
 import clsx from "clsx";
 import Link from "next/link";
-import { Github, Linkedin, Mail, type LucideIcon } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  type LucideIcon,
+  ExternalLink,
+} from "lucide-react";
 import Image from "next/image";
 import { Container } from "@/components/Container";
 import { motion } from "framer-motion";
@@ -22,6 +28,7 @@ function SocialLink({
     <li className={clsx(className, "flex")}>
       <Link
         href={href}
+        target="_blank"
         className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-700 dark:text-zinc-200 dark:hover:text-teal-700"
       >
         <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-700" />
@@ -50,7 +57,7 @@ export const metadata = {
 
 export default function About() {
   return (
-    <Container className="sm:my-16">
+    <Container className="lg:my-16 mb-8 -mt-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -91,7 +98,7 @@ export default function About() {
               dark:text-zinc-100 
               sm:text-5xl"
           >
-            Hi, I&#39;m Michael 👋, Experienced Software Developer
+            Hi, I&#39;m Michael 👋, Software Developer, Wielder of Frameworks
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
@@ -115,11 +122,24 @@ export default function About() {
         </div>
         <div className="lg:pl-20">
           <ul role="list">
-            <SocialLink href="#" icon={Github} className="mt-4">
-              Find me on GitHub
+            <SocialLink
+              href="https://github.com/Mohcka"
+              icon={Github}
+              className="mt-4"
+            >
+              <div className="flex items-center">
+                Find me on GitHub <ExternalLink className="pl-2" size={24} />
+              </div>
             </SocialLink>
-            <SocialLink href="#" icon={Linkedin} className="mt-4">
-              Reach out to me on LinkedIn
+            <SocialLink
+              href="https://www.linkedin.com/in/michael-walker-746b8597/"
+              icon={Linkedin}
+              className="mt-4"
+            >
+              <div className="flex items-center">
+                Reach out to me on LinkedIn{" "}
+                <ExternalLink className="pl-2" size={24} />
+              </div>
             </SocialLink>
             <SocialLink
               href="mailto:michaelxwalker95@gmail.com"
