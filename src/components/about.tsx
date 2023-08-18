@@ -1,8 +1,11 @@
+"use client";
+
 import clsx from "clsx";
 import Link from "next/link";
 import { Github, Linkedin, Mail, type LucideIcon } from "lucide-react";
 import Image from "next/image";
 import { Container } from "@/components/Container";
+import { motion } from "framer-motion";
 
 function SocialLink({
   className,
@@ -19,9 +22,9 @@ function SocialLink({
     <li className={clsx(className, "flex")}>
       <Link
         href={href}
-        className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+        className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-700 dark:text-zinc-200 dark:hover:text-teal-700"
       >
-        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
+        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-700" />
         <span className="ml-4">{children}</span>
       </Link>
     </li>
@@ -48,7 +51,10 @@ export const metadata = {
 export default function About() {
   return (
     <Container className="sm:my-16">
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2.5, duration: 0.5 }}
         className="
         grid
         grid-cols-1
@@ -60,7 +66,7 @@ export default function About() {
         <div className="lg:pl-20">
           <div className="max-w-xs px-2.5 lg:max-w-none">
             <Image
-              src="/00008-2950131524.png"
+              src="/00008-2950131524.webp"
               alt=""
               sizes="(min-width: 1024px) 32rem, 20rem"
               width={512}
@@ -85,7 +91,7 @@ export default function About() {
               dark:text-zinc-100 
               sm:text-5xl"
           >
-            Hi, I&#39;m Michael 👋, Experiencd Software Developer
+            Hi, I&#39;m Michael 👋, Experienced Software Developer
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
@@ -124,7 +130,7 @@ export default function About() {
             </SocialLink>
           </ul>
         </div>
-      </div>
+      </motion.div>
     </Container>
   );
 }

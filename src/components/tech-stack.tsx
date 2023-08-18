@@ -4,64 +4,14 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import DynamicIcon from "@/components/DynamicIcon";
 import { AnimatePresence } from "framer-motion";
-
-export interface TechItem {
-  name: string;
-  iconUrl: string;
-}
-
-const tech: TechItem[] = [
-  {
-    name: "React",
-    iconUrl: "/react.svg",
-  },
-  {
-    name: "Next.js",
-    iconUrl: "/nextjs.svg",
-  },
-  {
-    name: "Tailwind CSS",
-    iconUrl: "/tailwind.svg",
-  },
-  {
-    name: "C Sharp",
-    iconUrl: "/c-sharp.svg",
-  },
-  {
-    name: "aws",
-    iconUrl: "/amazonaws.svg",
-  },
-  {
-    name: "mysql",
-    iconUrl: "/mysql.svg",
-  },
-  {
-    name: "mongodb",
-    iconUrl: "/mongodb.svg",
-  },
-  {
-    name: "prisma",
-    iconUrl: "/prisma.svg",
-  },
-  {
-    name: "graphql",
-    iconUrl: "/graphql.svg",
-  },
-  {
-    name: "typescript",
-    iconUrl: "/typescript.svg",
-  },
-  {
-    name: "api",
-    iconUrl: "/api.svg",
-  },
-];
+import { techIcons } from "@/data/constants/technologies";
 
 const subsetLength = 10;
+const removeTime = 2000;
 
 export default function TechList() {
   const [tecListhSubset, setTechListSubset] = useState(
-    tech.slice(0, subsetLength)
+    techIcons.slice(0, subsetLength)
   );
 
   function techListCompare(techName1: string, techName2: string) {
@@ -70,7 +20,7 @@ export default function TechList() {
 
   const replaceItemInTechListWithRandom = useCallback(() => {
     // get the difference between the two arrays
-    const filteredTechList = tech.filter((item) => {
+    const filteredTechList = techIcons.filter((item) => {
       return !tecListhSubset.some((techItem) =>
         techListCompare(techItem.name, item.name)
       );
@@ -95,7 +45,7 @@ export default function TechList() {
   useEffect(() => {
     const interval = setInterval(() => {
       replaceItemInTechListWithRandom();
-    }, 3500); // Change image every 3.5 seconds to allow for overlap
+    }, removeTime); // Change image every 3.5 seconds to allow for overlap
 
     return () => clearInterval(interval);
   }, [replaceItemInTechListWithRandom]);
@@ -124,23 +74,21 @@ export default function TechList() {
             lg:max-w-none 
             lg:grid-cols-5"
           >
-            {Array(tecListhSubset.length)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={i}
-                  className=" h-20 w-20 col-span-2 max-h-20 object-contain lg:col-span-1 dark:invert"
-                >
-                  {/* <Image
+            {tecListhSubset.map((tech, i) => (
+              <div
+                key={tech.name}
+                className=" h-20 w-20 col-span-2 max-h-20 object-contain lg:col-span-1 dark:invert"
+              >
+                {/* <Image
                   src={item.iconUrl}
                   alt={item.name}
                   className="col-span-2 max-h-20 w-full object-contain lg:col-span-1 dark:invert"
                   width={128}
                   height={128}
                 /> */}
-                  <DynamicIcon iconItem={tecListhSubset[i]} />
-                </div>
-              ))}
+                <DynamicIcon iconItem={tech} />
+              </div>
+            ))}
           </div>
         </div>
       </div>

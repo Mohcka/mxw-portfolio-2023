@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion, AnimatePresence, Variants, usePresence } from "framer-motion";
 import Image from "next/image";
-import { TechItem } from "./tech-stack";
+import { TechIcon } from "@/data/constants/technologies";
 
 const imageVariants: Variants = {
   hidden: { opacity: 0, y: 10 },
@@ -11,28 +11,7 @@ const imageVariants: Variants = {
   exit: { opacity: 0, y: -10 },
 };
 
-const DynamicIcon = ({ iconItem }: { iconItem: TechItem }) => {
-  // const images: string[] = useMemo(
-  //   () => [
-  //     "/nextjs.svg",
-  //     "/tailwind.svg",
-  //     "/c-sharp.svg",
-  //     "/amazonaws.svg",
-  //     "/mysql.svg",
-  //   ],
-  //   []
-  // );
-
-  // const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  //   }, 3500); // Change image every 3.5 seconds to allow for overlap
-
-  //   return () => clearInterval(interval);
-  // }, [images]);
-
+const DynamicIcon = ({ iconItem }: { iconItem: TechIcon }) => {
   return (
     <AnimatePresence>
       <motion.div

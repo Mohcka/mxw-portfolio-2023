@@ -1,14 +1,36 @@
+"use client";
+
+import { Variants, motion } from "framer-motion";
 import Image from "next/image";
+
+const sentence: Variants = {
+  visible: {
+    transition: {
+      staggerChildren: 0.06,
+    },
+  },
+};
+
+const letterVariants: Variants = {
+  hidden: { opacity: 0, y: 200, scale: 0 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+  },
+};
 
 export default function Header() {
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-72">
       <Image
-        src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply"
+        src="/00002-2227181087.webp"
         alt=""
-        className="absolute inset-0 -z-10 h-full w-full object-cover"
+        className="absolute inset-0 -z-10 h-full w-full object-cover object-[center_top]"
         fill
+        priority
       />
+      <div className="absolute inset-0 -z-10 h-full w-full bg-gray-900/50" />
       <div
         className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
         aria-hidden="true"
@@ -35,12 +57,40 @@ export default function Header() {
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            Innovation in Every Iteration
-          </h2>
-          <p className="mt-6 text-lg leading-8 text-gray-300">
+          <motion.h2
+            variants={sentence}
+            initial="hidden"
+            animate="visible"
+            className="text-4xl font-bold tracking-tight text-white sm:text-6xl whitespace-pre"
+          >
+            {"Innovation in".split("").map((letter, i) => (
+              <motion.span
+                key={i}
+                className="inline-block"
+                variants={letterVariants}
+              >
+                {letter}
+              </motion.span>
+            ))}
+            <br />
+            {"Every Iteration".split("").map((letter, i) => (
+              <motion.span
+                key={i}
+                className="inline-block"
+                variants={letterVariants}
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.5 }}
+            className="mt-6 text-2xl leading-8 text-gray-300"
+          >
             Pushing boundaries, one project at a time.
-          </p>
+          </motion.p>
         </div>
       </div>
     </div>

@@ -9,42 +9,55 @@ import {
   CardTitle,
 } from "@/components/shadcn/ui/card";
 import { Badge } from "@/components/shadcn/ui/badge";
-
-const people = [
-  {
-    name: "Jane Cooper",
-    title: "Kalido",
-    role: "Admin",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    email: "janecooper@example.com",
-    telephone: "+1-202-555-0170",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  // More people...
-];
+import { useMemo } from "react";
+import { ProjectsArray } from "@/data/constants/projects";
+import Link from "next/link";
 
 export default function Projects() {
+  const projects = useMemo(() => ProjectsArray, []);
+
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {Array(6)
-        .fill(people[0])
-        .map((person, i) => (
-          <Card key={i}>
-            <CardHeader>
-              <CardTitle>{person.title}</CardTitle>
-              <CardDescription>{person.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Card Content</p>
-            </CardContent>
-            <CardFooter>
-              <div>
-                <Badge variant="outline">{person.role}</Badge>
-              </div>
-            </CardFooter>
-          </Card>
-        ))}
+      {projects.map((project, i) => (
+        <Card className="transition hover:scale-110" key={i}>
+          <CardHeader>
+            <CardTitle className="hover:text-teal-700 transition cursor-pointer">
+              {project.name}
+            </CardTitle>
+            <CardDescription>{project.subtitle}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>{project.description}</p>
+          </CardContent>
+          <CardFooter>
+            <div>
+              {project.technologies.map((tech, i) => (
+                <div className="inline-block" key={i}>
+                  {tech.homePageUrl ? (
+                    <Link href={tech.homePageUrl} target="_blank">
+                      <Badge
+                        className="mr-2 mb-2 text-sm transition hover:text-white hover:bg-gray-700 hover:border-slate-700"
+                        variant="outline"
+                        style={{ borderColor: tech.color }}
+                      >
+                        {tech.name}
+                      </Badge>
+                    </Link>
+                  ) : (
+                    <Badge
+                      className="mr-2 mb-2 text-sm transition hover:text-white hover:bg-gray-700 hover:border-slate-700"
+                      variant="outline"
+                      style={{ borderColor: tech.color }}
+                    >
+                      {tech.name}
+                    </Badge>
+                  )}
+                </div>
+              ))}
+            </div>
+          </CardFooter>
+        </Card>
+      ))}
     </div>
   );
 }

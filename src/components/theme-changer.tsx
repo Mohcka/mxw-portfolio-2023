@@ -17,7 +17,7 @@ const ThemeChanger = () => {
       The current theme is: {resolvedTheme}
       <button
         className="rounded
-        bg-indigo-600
+        bg-teal-700
         px-2
         py-1
         text-xs
@@ -28,14 +28,14 @@ const ThemeChanger = () => {
         focus-visible:outline
         focus-visible:outline-2
         focus-visible:outline-offset-2
-        focus-visible:outline-indigo-600"
+        focus-visible:outline-teal-700"
         onClick={() => setTheme("light")}
       >
         Light Mode
       </button>
       <button
         className="rounded
-        bg-indigo-600
+        bg-teal-700
         px-2
         py-1
         text-xs
@@ -46,7 +46,7 @@ const ThemeChanger = () => {
         focus-visible:outline
         focus-visible:outline-2
         focus-visible:outline-offset-2
-        focus-visible:outline-indigo-600"
+        focus-visible:outline-teal-700"
         onClick={() => setTheme("dark")}
       >
         Dark Mode

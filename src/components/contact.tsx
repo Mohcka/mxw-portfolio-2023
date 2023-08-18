@@ -23,7 +23,7 @@ export default function Contact() {
                     <dt className="sr-only">Email</dt>
                     <dd>
                       <a
-                        className="font-semibold text-indigo-600"
+                        className="font-semibold text-teal-700"
                         href="mailto:collaborate@example.com"
                       >
                         collaborate@example.com
@@ -45,7 +45,7 @@ export default function Contact() {
                     <dt className="sr-only">Email</dt>
                     <dd>
                       <a
-                        className="font-semibold text-indigo-600"
+                        className="font-semibold text-teal-700"
                         href="mailto:press@example.com"
                       >
                         press@example.com
@@ -67,7 +67,7 @@ export default function Contact() {
                     <dt className="sr-only">Email</dt>
                     <dd>
                       <a
-                        className="font-semibold text-indigo-600"
+                        className="font-semibold text-teal-700"
                         href="mailto:careers@example.com"
                       >
                         careers@example.com
@@ -89,7 +89,7 @@ export default function Contact() {
                     <dt className="sr-only">Email</dt>
                     <dd>
                       <a
-                        className="font-semibold text-indigo-600"
+                        className="font-semibold text-teal-700"
                         href="mailto:hello@example.com"
                       >
                         hello@example.com
