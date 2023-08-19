@@ -117,6 +117,10 @@ export const technologies = {
     name: "Content Upload",
     color: "#31a1ce",
   },
+  DarkMode: {
+    name: "Dark Mode",
+    color: "#2c2c2c",
+  },
 };
 
 export type TechIcon = {

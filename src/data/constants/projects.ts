@@ -40,6 +40,7 @@ export const projects = {
       technologies.ResponsiveDesign,
       technologies.PublicAPI,
       technologies.ContentUpload,
+      technologies.DarkMode,
     ] as Technology[],
     color: "#FF6F61",
   },
