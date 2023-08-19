@@ -9,6 +9,7 @@ import Projects from "@/components/projects";
 import { Separator } from "@/components/shadcn/ui/separator";
 import TechList from "@/components/tech-stack";
 import ThemeChanger from "@/components/theme-changer";
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -44,13 +45,21 @@ export default function Home() {
       <div className=" py-10">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div>
-            Vectors and icons by{" "}
+            Vectors and icons from{" "}
             <Link
               href="https://www.svgrepo.com"
               target="_blank"
               className="text-teal-700 font-semibold"
             >
-              SVG Repo
+              SVG Repo <ExternalLink size={20} className="inline -mt-1" />
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="https://lucide.dev/"
+              target="_blank"
+              className="text-teal-700 font-semibold"
+            >
+              Lucide Icons <ExternalLink size={20} className="inline -mt-1" />
             </Link>
           </div>
           <div>
@@ -60,7 +69,17 @@ export default function Home() {
               target="_blank"
               className="text-teal-700 font-semibold"
             >
-              StableDiffusion
+              StableDiffusion <ExternalLink size={20} className="inline -mt-1" />
+            </Link>
+          </div>
+          <div>
+            Header Image From{" "}
+            <Link
+              href="https://unsplash.com/photos/NPlv2pkYoUA"
+              target="_blank"
+              className="text-teal-700 font-semibold"
+            >
+              Unsplash <ExternalLink size={20} className="inline -mt-1" />
             </Link>
           </div>
         </div>
