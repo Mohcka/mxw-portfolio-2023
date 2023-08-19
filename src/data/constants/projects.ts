@@ -5,7 +5,7 @@ export const projects = {
     name: "Kalaido",
     subtitle: "SaaS AI content generation platform",
     description:
-      "Kalaido is a SaaS platform that uses AI to generate content for your website. It's like having a team of writers at your disposal 24/7.",
+      "Kalaido is a SaaS platform that uses AI to generate content for your project. It's like having a team of writers/designers at your disposal 24/7.",
     technologies: [
       technologies.AI,
       technologies.ChatGPT,
@@ -13,6 +13,7 @@ export const projects = {
       technologies.React,
       technologies.Serverless,
       technologies.Nextjs,
+      technologies.PostgreSQL,
       technologies.TailwindCSS,
       technologies.Authentication,
       technologies.OAuth,
@@ -30,11 +31,15 @@ export const projects = {
       technologies.React,
       technologies.Serverless,
       technologies.Nextjs,
+      technologies.PostgreSQL,
+      technologies.Prisma,
       technologies.TailwindCSS,
       technologies.Authentication,
       technologies.OAuth,
       technologies.FullStack,
       technologies.ResponsiveDesign,
+      technologies.PublicAPI,
+      technologies.ContentUpload,
     ] as Technology[],
     color: "#FF6F61",
   },
@@ -47,11 +52,14 @@ export const projects = {
       technologies.React,
       technologies.Serverless,
       technologies.Nextjs,
+      technologies.PostgreSQL,
+      technologies.Prisma,
       technologies.TailwindCSS,
       technologies.Authentication,
       technologies.OAuth,
       technologies.FullStack,
       technologies.ResponsiveDesign,
+      technologies.ServerStateManagement,
     ] as Technology[],
     color: "#FF6F61",
   },
@@ -74,20 +82,18 @@ export const projects = {
   },
 };
 
-
 export const ProjectsArray = Object.values(projects);
 
 const obj1 = {
   name1: {
     name: "name1",
-    id: "id1"
+    id: "id1",
   },
   name2: {
     name: "name2",
-  }
-}
-
+  },
+};
 
 const obj = {
-  thing1: [obj1.name1, obj1.name2]
-}
+  thing1: [obj1.name1, obj1.name2],
+};

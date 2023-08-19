@@ -105,6 +105,18 @@ export const technologies = {
     color: "#0C344B",
     homePageUrl: "https://www.prisma.io/",
   },
+  PublicAPI: {
+    name: "Public API",
+    color: "#2ECC71",
+  },
+  ServerStateManagement: {
+    name: "Server State Management",
+    color: "#2cd343",
+  },
+  ContentUpload: {
+    name: "Content Upload",
+    color: "#31a1ce",
+  },
 };
 
 export type TechIcon = {
@@ -222,4 +234,3 @@ export const techIcons = [
     iconUrl: "/vercel.svg",
   },
 ];
-
