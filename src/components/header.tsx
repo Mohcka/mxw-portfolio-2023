@@ -24,13 +24,13 @@ export default function Header() {
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-72">
       <Image
-        src="/00002-2227181087.webp"
+        src="/unsplash.webp"
         alt=""
-        className="absolute inset-0 -z-10 h-full w-full object-cover object-[center_top]"
+        className="absolute inset-0 -z-10 h-full w-full object-cover"
         fill
         priority
       />
-      <div className="absolute inset-0 -z-10 h-full w-full bg-gray-900/50" />
+      <div className="absolute inset-0 -z-10 h-full w-full bg-gray-900/70" />
       <div
         className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
         aria-hidden="true"
@@ -87,7 +87,7 @@ export default function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2.5 }}
-            className="mt-6 text-2xl leading-8 text-gray-300"
+            className="mt-6 text-2xl leading-8 text-gray-200"
           >
             Pushing boundaries, one project at a time.
           </motion.p>
