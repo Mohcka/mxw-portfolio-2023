@@ -1,5 +1,11 @@
 import { technologies, type Technology } from "./technologies";
 
+export enum SourceStatus {
+  CodeOnly = "Code-Only",
+  Live = "Live",
+  Concept = "Concept",
+}
+
 export const projects = {
   Kalaido: {
     name: "Kalaido",
@@ -21,9 +27,13 @@ export const projects = {
       technologies.ResponsiveDesign,
     ] as Technology[],
     color: "#FF6F61",
+    githubLink: "https://github.com/Mohcka/kalaido",
+    roadmapLink: "",
+    sourceStatus: SourceStatus.Live,
+    projectLink: "",
   },
   Commersify: {
-    name: "Commersify",
+    name: "Commersify (Admin Portal)",
     subtitle: "An e-commerce platform for small businesses",
     description:
       "Commersify is an e-commerce platform that allows small businesses create their own online store in minutes.",
@@ -41,8 +51,31 @@ export const projects = {
       technologies.PublicAPI,
       technologies.ContentUpload,
       technologies.DarkMode,
+      technologies.Microservices,
     ] as Technology[],
     color: "#FF6F61",
+    githubLink: "https://github.com/Mohcka/commersify-admin",
+    roadmapLink: "",
+    sourceStatus: SourceStatus.Concept,
+    projectLink: "",
+  },
+  CommersifyShop: {
+    name: "Commersify (Consumer Portal)",
+    subtitle: "An e-commerce front-end for shoppers",
+    description:
+      "A consumer-facing portal, offering a seamless shopping experience for users. It integrates with the main platform, allowing shoppers to browse products, make purchases, and manage their orders with ease.",
+    technologies: [
+      technologies.React,
+      technologies.Nextjs,
+      technologies.TailwindCSS,
+      technologies.ResponsiveDesign,
+      technologies.Stripe,
+    ] as Technology[],
+    color: "#FF6F61",
+    githubLink: "https://github.com/Mohcka/commersify-store-front",
+    roadmapLink: "",
+    sourceStatus: SourceStatus.Concept,
+    projectLink: "",
   },
   EpicFlix: {
     name: "EpicFlix",
@@ -63,6 +96,10 @@ export const projects = {
       technologies.ServerStateManagement,
     ] as Technology[],
     color: "#FF6F61",
+    githubLink: "https://github.com/Mohcka/epic-flix",
+    roadmapLink: "",
+    sourceStatus: SourceStatus.Concept,
+    projectLink: "",
   },
   CampSite: {
     name: "CampSite",
@@ -80,6 +117,11 @@ export const projects = {
       technologies.EFCore,
     ] as Technology[],
     color: "#FF6F61",
+    githubLink:
+      "https://github.com/revature042020-michwong98/rvtr-app-campsite",
+    roadmapLink: "",
+    sourceStatus: SourceStatus.CodeOnly,
+    projectLink: "",
   },
 };
 

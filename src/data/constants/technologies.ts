@@ -121,6 +121,11 @@ export const technologies = {
     name: "Dark Mode",
     color: "#2c2c2c",
   },
+  Stripe: {
+    name: "Stripe Payment Gateway",
+    color: "#6772E5",
+    homePageUrl: "https://stripe.com/",
+  },
 };
 
 export type TechIcon = {
@@ -232,9 +237,5 @@ export const techIcons = [
   {
     name: "Unity",
     iconUrl: "/unity.svg",
-  },
-  {
-    name: "Vercel",
-    iconUrl: "/vercel.svg",
-  },
+  }
 ];
