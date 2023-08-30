@@ -24,6 +24,9 @@ const DynamicIcon = ({ iconItem }: { iconItem: TechIcon }) => {
         className="absolute h-20 w-20"
       >
         <Image src={iconItem.iconUrl} alt={iconItem.name} fill />
+        <p className="absolute top-[90px] left-1/2 -translate-x-1/2 text-center">
+          {iconItem.name}
+        </p>
       </motion.div>
     </AnimatePresence>
   );

@@ -3,7 +3,7 @@ import {
   HandThumbUpIcon,
   UserIcon,
 } from "@heroicons/react/20/solid";
-import { Building, HeartPulse, Landmark, BarChart3 } from "lucide-react";
+import { Building, HeartPulse, Landmark, BarChart3, BrainCircuit } from "lucide-react";
 
 const timeline = [
   {
@@ -29,6 +29,16 @@ const timeline = [
   {
     id: 3,
     content: "",
+    target: "Cognizant",
+    href: "#",
+    date: "2021",
+    datetime: "2021-08-01",
+    icon: BrainCircuit,
+    iconBackground: "bg-blue-500",
+  },
+  {
+    id: 4,
+    content: "",
     target: "Revature",
     href: "#",
     date: "2020",
@@ -37,7 +47,7 @@ const timeline = [
     iconBackground: "bg-orange-700",
   },
   {
-    id: 4,
+    id: 5,
     content: "",
     target: "PageHub",
     href: "#",
@@ -55,7 +65,9 @@ function classNames(...classes: string[]) {
 export default function Experience() {
   return (
     <div>
-      <h2 className="text-center text-3xl font-bold mb-20 mt-5">My Journey So Far...</h2>
+      <h2 className="text-center text-3xl font-bold mb-20 mt-5">
+        My Journey So Far...
+      </h2>
       <div className="flex justify-center">
         <ul role="list" className="-mb-8 w-full sm:w-96">
           {timeline.map((event, eventIdx) => (
