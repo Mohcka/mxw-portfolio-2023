@@ -30,7 +30,7 @@ export const projects = {
     githubLink: "https://github.com/Mohcka/kalaido",
     roadmapLink: "",
     sourceStatus: SourceStatus.Live,
-    projectLink: "",
+    projectLink: "https://kalaido.vercel.app/",
   },
   Commersify: {
     name: "Commersify (Admin Portal)",
@@ -57,7 +57,7 @@ export const projects = {
     githubLink: "https://github.com/Mohcka/commersify-admin",
     roadmapLink: "",
     sourceStatus: SourceStatus.Concept,
-    projectLink: "",
+    projectLink: "https://commersify-store-front.vercel.app/",
   },
   CommersifyShop: {
     name: "Commersify (Consumer Portal)",
@@ -75,7 +75,7 @@ export const projects = {
     githubLink: "https://github.com/Mohcka/commersify-store-front",
     roadmapLink: "",
     sourceStatus: SourceStatus.Concept,
-    projectLink: "",
+    projectLink: "https://commersify-store-front.vercel.app/",
   },
   EpicFlix: {
     name: "EpicFlix",
@@ -99,7 +99,7 @@ export const projects = {
     githubLink: "https://github.com/Mohcka/epic-flix",
     roadmapLink: "",
     sourceStatus: SourceStatus.Concept,
-    projectLink: "",
+    projectLink: "https://epic-flix.vercel.app/",
   },
   CampSite: {
     name: "CampSite",
@@ -121,22 +121,8 @@ export const projects = {
       "https://github.com/revature042020-michwong98/rvtr-app-campsite",
     roadmapLink: "",
     sourceStatus: SourceStatus.CodeOnly,
-    projectLink: "",
+    projectLink: null,
   },
 };
 
 export const ProjectsArray = Object.values(projects);
-
-const obj1 = {
-  name1: {
-    name: "name1",
-    id: "id1",
-  },
-  name2: {
-    name: "name2",
-  },
-};
-
-const obj = {
-  thing1: [obj1.name1, obj1.name2],
-};

@@ -28,7 +28,7 @@ export default function Projects() {
 
   return (
     <div>
-      <Heading>Projects I Tinker With in my Spare Time</Heading>
+      <Heading>Projects</Heading>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, i) => (
@@ -37,16 +37,19 @@ export default function Projects() {
               <CardTitle className="  ">
                 <div className="flex justify-between items-center">
                   {project.sourceStatus !== SourceStatus.CodeOnly ? (
-                    <Link
-                      href={"#"}
-                      className="hover:text-teal-700 cursor-pointer transition"
-                    >
-                      <h2>{project.name}</h2>
-                    </Link>
+                    <div className="flex">
+                      <Link
+                        href={project.projectLink ?? "#"}
+                        className="hover:text-teal-700 cursor-pointer transition"
+                      >
+                        <h2>{project.name}</h2>
+                      </Link>
+                      <Badge className="mx-2 self-center">{project.sourceStatus}</Badge>
+                    </div>
                   ) : (
                     <div className="flex">
                       <h2>{project.name}</h2>
-                      <Badge className="ml-2">Code Only</Badge>
+                      <Badge className="mx-2 self-center">Code Only</Badge>
                     </div>
                   )}
                   <TooltipProvider>
