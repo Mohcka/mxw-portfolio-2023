@@ -78,7 +78,7 @@ export default function TechList() {
             {tecListhSubset.map((tech, i) => (
               <div
                 key={tech.name}
-                className=" h-20 w-20 col-span-2 max-h-20 object-contain lg:col-span-1 dark:invert"
+                className=" h-20 w-20 mb-10 col-span-2 max-h-20 object-contain lg:col-span-1 dark:invert"
               >
                 {/* <Image
                   src={item.iconUrl}

@@ -147,7 +147,7 @@ export const techIcons = [
     iconUrl: "/tailwind.svg",
   },
   {
-    name: "C Sharp",
+    name: "C#",
     iconUrl: "/c-sharp.svg",
   },
   {
@@ -187,7 +187,7 @@ export const techIcons = [
     iconUrl: "/azure.svg",
   },
   {
-    name: "CSS3",
+    name: "CSS",
     iconUrl: "/css3.svg",
   },
   {
@@ -195,7 +195,7 @@ export const techIcons = [
     iconUrl: "/docker.svg",
   },
   {
-    name: "DotNet",
+    name: ".NET Framework",
     iconUrl: "/dotnet.svg",
   },
   {
@@ -203,7 +203,7 @@ export const techIcons = [
     iconUrl: "/gatsby.svg",
   },
   {
-    name: "HTML5",
+    name: "HTML",
     iconUrl: "/html5.svg",
   },
   {
