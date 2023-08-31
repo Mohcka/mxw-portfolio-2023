@@ -8,6 +8,7 @@ import Hero from "@/components/hero";
 import Projects from "@/components/projects";
 import { Separator } from "@/components/shadcn/ui/separator";
 import TechList from "@/components/tech-stack";
+import PerformanceSection from "@/components/PerformanceSection";
 import ThemeChanger from "@/components/theme-changer";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
@@ -41,6 +42,11 @@ export default function Home() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Separator />
       </div>
+      <div className="py-10">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <PerformanceSection />
+        </div>
+      </div>
       <Separator />
       <div className=" py-10">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -69,7 +75,8 @@ export default function Home() {
               target="_blank"
               className="text-teal-700 font-semibold"
             >
-              StableDiffusion <ExternalLink size={20} className="inline -mt-1" />
+              StableDiffusion{" "}
+              <ExternalLink size={20} className="inline -mt-1" />
             </Link>
           </div>
           <div>
