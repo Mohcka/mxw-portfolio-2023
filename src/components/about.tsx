@@ -94,8 +94,6 @@ export default function About() {
               text-4xl
               font-bold
               tracking-tight
-              text-zinc-800
-              dark:text-zinc-100 
               sm:text-5xl"
           >
             Hi, I&#39;m Michael 👋, Software Developer, Wielder of Frameworks
