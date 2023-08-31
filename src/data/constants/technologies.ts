@@ -126,6 +126,11 @@ export const technologies = {
     color: "#6772E5",
     homePageUrl: "https://stripe.com/",
   },
+  LangChain: {
+    name: "LangChain",
+    color: "#2ECC40",
+    homePageUrl: "https://www.langchain.com/",
+  },
 };
 
 export type TechIcon = {
@@ -237,5 +242,5 @@ export const techIcons = [
   {
     name: "Unity",
     iconUrl: "/unity.svg",
-  }
+  },
 ];

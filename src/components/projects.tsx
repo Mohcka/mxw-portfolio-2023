@@ -44,12 +44,10 @@ export default function Projects() {
                       >
                         <h2>{project.name}</h2>
                       </Link>
-                      <Badge className="mx-2 self-center">{project.sourceStatus}</Badge>
                     </div>
                   ) : (
                     <div className="flex">
                       <h2>{project.name}</h2>
-                      <Badge className="mx-2 self-center">Code Only</Badge>
                     </div>
                   )}
                   <TooltipProvider>
@@ -69,7 +67,15 @@ export default function Projects() {
                     </Tooltip>
                   </TooltipProvider>
                 </div>
+                {project.sourceStatus && (
+                  <div>
+                    <Badge className={cn("inline")}>
+                      {project.sourceStatus}
+                    </Badge>
+                  </div>
+                )}
               </CardTitle>
+
               <CardDescription>{project.subtitle}</CardDescription>
             </CardHeader>
             <CardContent>

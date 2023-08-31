@@ -7,6 +7,24 @@ export enum SourceStatus {
 }
 
 export const projects = {
+  AIChatWithAgents: {
+    name: "AI Chat \\w Automated Agents",
+    subtitle: "Accomplish more with AI and extensible services",
+    description:
+      "An AI-driven chatbot enhanced by the 'langchain' framework, with services that can be expanded through agents. Presently, the available services include 'web searching' and 'simple math calculator'.",
+    technologies: [
+      technologies.AI,
+      technologies.ChatGPT,
+      technologies.LangChain,
+      technologies.React,
+      technologies.TailwindCSS,
+    ] as Technology[],
+    color: "#FF6F61",
+    githubLink: "https://github.com/Mohcka/chat-bot-with-agents",
+    roadmapLink: "",
+    sourceStatus: SourceStatus.CodeOnly,
+    projectLink: null,
+  },
   Kalaido: {
     name: "Kalaido",
     subtitle: "SaaS AI content generation platform",
@@ -29,7 +47,7 @@ export const projects = {
     color: "#FF6F61",
     githubLink: "https://github.com/Mohcka/kalaido",
     roadmapLink: "",
-    sourceStatus: SourceStatus.Live,
+    sourceStatus: null,
     projectLink: "https://kalaido.vercel.app/",
   },
   Commersify: {
@@ -56,7 +74,7 @@ export const projects = {
     color: "#FF6F61",
     githubLink: "https://github.com/Mohcka/commersify-admin",
     roadmapLink: "",
-    sourceStatus: SourceStatus.Concept,
+    sourceStatus: null,
     projectLink: "https://commersify-store-front.vercel.app/",
   },
   CommersifyShop: {
@@ -74,7 +92,7 @@ export const projects = {
     color: "#FF6F61",
     githubLink: "https://github.com/Mohcka/commersify-store-front",
     roadmapLink: "",
-    sourceStatus: SourceStatus.Concept,
+    sourceStatus: null,
     projectLink: "https://commersify-store-front.vercel.app/",
   },
   EpicFlix: {
@@ -98,7 +116,7 @@ export const projects = {
     color: "#FF6F61",
     githubLink: "https://github.com/Mohcka/epic-flix",
     roadmapLink: "",
-    sourceStatus: SourceStatus.Concept,
+    sourceStatus: null,
     projectLink: "https://epic-flix.vercel.app/",
   },
   CampSite: {
@@ -113,6 +131,7 @@ export const projects = {
       technologies.Authentication,
       technologies.Bulma,
       technologies.FullStack,
+      technologies.Microservices,
       technologies.ResponsiveDesign,
       technologies.EFCore,
     ] as Technology[],
