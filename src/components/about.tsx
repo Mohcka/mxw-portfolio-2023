@@ -108,13 +108,20 @@ export default function About() {
               well-structured.
             </p>
             <p>
-              Outside of coding, I have a genuine passion for 3D modeling and
-              design as a hobby. This creative endeavor allows me to blend the
-              precision of technology with the freedom of artistic expression.
-              Recently, I&#39;ve been exploring the capabilities of Next.js,
-              keeping up with the latest trends in web app development. Through
-              every endeavor, my aim is to deliver excellence and make a lasting
-              impression on the world.
+              Recently, my interest has expanded into the realm of artificial
+              intelligence, particularly leveraging tools like the ChatGPT API
+              and LangChain. This has allowed me to delve deeper into the
+              capabilities of AI-driven solutions, enhancing my software
+              development skills. In addition to this, I&apos;ve been exploring
+              the capabilities of Next.js, ensuring I stay updated with the
+              latest trends in web app development. Outside of coding, I have a
+              genuine passion for 3D modeling and design as a hobby, blending
+              the precision of technology with the freedom of artistic
+              expression.
+            </p>
+            <p>
+              Through every endeavor, my aim is to deliver excellence and make a
+              lasting impression on the world.
             </p>
           </div>
         </div>
