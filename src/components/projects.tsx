@@ -40,7 +40,7 @@ export default function Projects() {
                     <div className="flex">
                       <Link
                         href={project.projectLink ?? "#"}
-                        className="hover:text-teal-700 cursor-pointer transition"
+                        className="text-teal-700 hover:text-primary cursor-pointer transition"
                       >
                         <h2>{project.name}</h2>
                       </Link>
@@ -55,7 +55,7 @@ export default function Projects() {
                       <TooltipTrigger>
                         <Link
                           href={project.githubLink}
-                          className="hover:text-teal-700 cursor-pointer transition"
+                          className="text-teal-700 hover:text-primary cursor-pointer transition"
                           aria-label={project.name}
                         >
                           <FaGithub size={40} />
