@@ -38,5 +38,9 @@
     "tailwindcss-animate": "^1.0.6",
     "three": "^0.155.0",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "plaiceholder": "^3.0.0",
+    "ts-node": "^10.9.1"
   }
 }
