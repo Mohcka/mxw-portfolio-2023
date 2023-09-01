@@ -15,6 +15,8 @@ export default function TechList() {
     techIcons.slice(0, subsetLength)
   );
 
+  const [techInsertionComplete, setTechInsertionComplete] = useState(false);
+
   function techListCompare(techName1: string, techName2: string) {
     return techName1 === techName2;
   }
@@ -43,13 +45,25 @@ export default function TechList() {
     setTechListSubset(newTechListSubset);
   }, [tecListhSubset]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      replaceItemInTechListWithRandom();
-    }, removeTime); // Change image every 3.5 seconds to allow for overlap
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     replaceItemInTechListWithRandom();
+  //   }, removeTime); // Change image every 3.5 seconds to allow for overlap
 
-    return () => clearInterval(interval);
-  }, [replaceItemInTechListWithRandom]);
+  //   return () => clearInterval(interval);
+  // }, [replaceItemInTechListWithRandom]);
+
+  // using removeTime as a delay, set a timeout to replace the item in the list
+  // if the insertion is complete.  Then after the timeout, reset the insertion flag
+  useEffect(() => {
+    if (techInsertionComplete) {
+      const timeout = setTimeout(() => {
+        replaceItemInTechListWithRandom();
+        setTechInsertionComplete(false);
+      }, removeTime);
+      return () => clearTimeout(timeout);
+    }
+  }, [techInsertionComplete, replaceItemInTechListWithRandom]);
 
   return (
     <>
@@ -87,7 +101,12 @@ export default function TechList() {
                   width={128}
                   height={128}
                 /> */}
-                <DynamicIcon iconItem={tech} />
+                <DynamicIcon
+                  iconItem={tech}
+                  insertionCompleteHandler={() =>
+                    setTechInsertionComplete(true)
+                  }
+                />
               </div>
             ))}
           </div>
