@@ -43,11 +43,12 @@ export const projects = {
       technologies.OAuth,
       technologies.FullStack,
       technologies.ResponsiveDesign,
+      technologies.Stripe,
     ] as Technology[],
     color: "#FF6F61",
     githubLink: "https://github.com/Mohcka/kalaido",
     roadmapLink: "",
-    sourceStatus: null,
+    sourceStatus: SourceStatus.Live,
     projectLink: "https://kalaido.vercel.app/",
   },
   Commersify: {
@@ -74,7 +75,7 @@ export const projects = {
     color: "#FF6F61",
     githubLink: "https://github.com/Mohcka/commersify-admin",
     roadmapLink: "",
-    sourceStatus: null,
+    sourceStatus: SourceStatus.Concept,
     projectLink: "https://commersify-store-front.vercel.app/",
   },
   CommersifyShop: {
@@ -92,7 +93,7 @@ export const projects = {
     color: "#FF6F61",
     githubLink: "https://github.com/Mohcka/commersify-store-front",
     roadmapLink: "",
-    sourceStatus: null,
+    sourceStatus: SourceStatus.Concept,
     projectLink: "https://commersify-store-front.vercel.app/",
   },
   EpicFlix: {

@@ -69,7 +69,12 @@ export default function Projects() {
                 </div>
                 {project.sourceStatus && (
                   <div>
-                    <Badge className={cn("inline")}>
+                    <Badge
+                      className={cn("inline", {
+                        "bg-red-900":
+                          project.sourceStatus === SourceStatus.Live,
+                      })}
+                    >
                       {project.sourceStatus}
                     </Badge>
                   </div>
