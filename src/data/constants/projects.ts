@@ -76,7 +76,7 @@ export const projects = {
     githubLink: "https://github.com/Mohcka/commersify-admin",
     roadmapLink: "",
     sourceStatus: SourceStatus.Concept,
-    projectLink: "https://commersify-store-front.vercel.app/",
+    projectLink: "https://commersify-admin.vercel.app/",
   },
   CommersifyShop: {
     name: "Commersify (Consumer Portal)",
