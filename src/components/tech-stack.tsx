@@ -70,7 +70,7 @@ export default function TechList() {
       <div className=" py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Heading>
-            Broad Knowledge of Some of the Latest and Greatest Technologies
+            Broad Knowledge on Some of the Latest and Greatest Technologies
           </Heading>
           <div
             className="
