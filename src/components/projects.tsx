@@ -94,7 +94,7 @@ export default function Projects() {
                       <Link
                         href={tech.homePageUrl}
                         target="_blank"
-                        aria-label={project.name}
+                        aria-label={tech.name}
                       >
                         <Badge
                           className="h-7 mb-2 mr-2 text-sm transition hover:text-white hover:bg-gray-700 hover:border-slate-700"
