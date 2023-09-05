@@ -29,7 +29,6 @@ const DynamicIcon = ({
   useEffect(() => {
     if (imgLoaded) {
       controls.start({ opacity: 1, y: 0 });
-      console.log("img loaded");
       
     }
   }, [imgLoaded, controls]);
