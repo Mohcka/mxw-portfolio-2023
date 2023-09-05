@@ -13,7 +13,6 @@ import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
-const ThreeD = dynamic(() => import("@/components/ThreeD"), { ssr: false });
 const TechList = dynamic(() => import("@/components/tech-stack"));
 
 
@@ -95,7 +94,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <ThreeD />
     </>
   );
 }

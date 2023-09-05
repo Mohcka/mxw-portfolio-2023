@@ -2,6 +2,9 @@
 
 import { Variants, motion } from "framer-motion";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const ThreeD = dynamic(() => import("@/components/ThreeD"), { ssr: false });
 
 const sentence: Variants = {
   visible: {
@@ -89,6 +92,7 @@ export default function Header() {
           </motion.p>
         </div>
       </div>
+      <ThreeD />
     </div>
   );
 }
