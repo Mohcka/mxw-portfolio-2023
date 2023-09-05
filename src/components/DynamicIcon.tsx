@@ -4,8 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import {
   motion,
   AnimatePresence,
-  Variants,
-  usePresence,
+  type Variants,
   useAnimationControls,
 } from "framer-motion";
 import Image from "next/image";
