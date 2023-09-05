@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import Heading from "@/components/heading";
+import { ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 type Props = {};
 
@@ -15,6 +17,18 @@ const PerformanceSection = (props: Props) => {
           src="/lighthouse.webp"
           alt="Lighthouse Image"
         />
+      </div>
+      <div className="my-8">
+        <Link
+          href="https://pagespeed.web.dev/analysis/https-mwweb-dev/fxv6lfykv6?form_factor=desktop"
+          target="_blank"
+          aria-label="More Details"
+          className="rounded-full"
+        >
+          <button className="flex bg-teal-700 hover:bg-primary transition text-white py-3 px-5 rounded-full font-semibold">
+            More Details <ExternalLink className="-mt-0.5 ml-1" />
+          </button>
+        </Link>
       </div>
     </div>
   );

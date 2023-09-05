@@ -6,11 +6,23 @@ import DynamicIcon from "@/components/DynamicIcon";
 import { AnimatePresence } from "framer-motion";
 import { techIcons } from "@/data/constants/technologies";
 import Heading from "./heading";
+import Link from "next/link";
+import { Expand, ExternalLink } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/shadcn/ui/dialog";
+import { ScrollArea } from "@/components/shadcn/ui/scroll-area";
 
 const subsetLength = 10;
 const removeTime = 2000;
 
 export default function TechList() {
+  const [isMounted, setIsMounted] = useState(false);
   const [tecListhSubset, setTechListSubset] = useState(
     techIcons.slice(0, subsetLength)
   );
@@ -45,6 +57,10 @@ export default function TechList() {
     setTechListSubset(newTechListSubset);
   }, [tecListhSubset]);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     replaceItemInTechListWithRandom();
@@ -64,6 +80,8 @@ export default function TechList() {
       return () => clearTimeout(timeout);
     }
   }, [techInsertionComplete, replaceItemInTechListWithRandom]);
+
+  if (!isMounted) return null;
 
   return (
     <>
@@ -109,6 +127,41 @@ export default function TechList() {
                 />
               </div>
             ))}
+          </div>
+          <div className="my-20">
+            <div className="flex justify-center">
+              <Dialog>
+                <DialogTrigger>
+                  <button className="flex mx-auto bg-teal-700 hover:bg-primary transition text-white py-3 px-5 rounded-full font-semibold">
+                    Full List <Expand className=" ml-1" />
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="m-0 p-0">
+                  <DialogHeader className="mt-5 mx-4">
+                    <DialogTitle>Technologies</DialogTitle>
+                    <DialogDescription></DialogDescription>
+                  </DialogHeader>
+                  <ScrollArea className="max-h-96 sm:max-h-[900px] sm:max-w-96 overflow-y-scroll mt-5 border-t ">
+                    <div className="grid sm:grid-cols-3 grid-cols-2 py-2 px-4 gap-8">
+                      {techIcons.map((tech, i) => (
+                        <div
+                          key={i}
+                          className="flex justify-center items-center flex-col"
+                        >
+                          <Image
+                            src={tech.iconUrl}
+                            alt={tech.name}
+                            width={64}
+                            height={64}
+                          />
+                          {tech.name}
+                        </div>
+                      ))}
+                    </div>
+                  </ScrollArea>
+                </DialogContent>
+              </Dialog>
+            </div>
           </div>
         </div>
       </div>
