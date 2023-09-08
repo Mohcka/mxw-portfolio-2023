@@ -141,7 +141,7 @@ export default function TechList() {
                     <DialogTitle>Technologies</DialogTitle>
                     <DialogDescription></DialogDescription>
                   </DialogHeader>
-                  <ScrollArea className="max-h-96 sm:max-h-[900px] sm:max-w-96 overflow-y-scroll mt-5 border-t ">
+                  <ScrollArea className="max-h-96 sm:max-h-[900px] sm:max-w-96 mt-5 border-t ">
                     <div className="grid sm:grid-cols-3 grid-cols-2 py-2 px-4 gap-8">
                       {techIcons.map((tech, i) => (
                         <div
