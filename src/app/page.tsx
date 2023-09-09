@@ -45,12 +45,12 @@ export default function Home() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Separator />
       </div>
-      <div className="py-10">
+      {/* <div className="py-10">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <PerformanceSection />
         </div>
       </div>
-      <Separator />
+      <Separator /> */}
       <div className=" py-10">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div>
