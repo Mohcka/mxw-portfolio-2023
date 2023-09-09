@@ -2,6 +2,11 @@
 
 import { Variants, motion } from "framer-motion";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+import { useViewportSize } from "@mantine/hooks";
+import { useEffect, useState } from "react";
+
+const ThreeD = dynamic(() => import("@/components/ThreeD"), { ssr: false });
 
 const sentence: Variants = {
   visible: {
@@ -21,24 +26,38 @@ const letterVariants: Variants = {
 };
 
 export default function Header() {
+  const [mounted, setMounted] = useState(false);
+  const { width } = useViewportSize();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // if (!mounted) return null;
+
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-72">
-      <Image
-        src="/unsplash.webp"
-        alt=""
-        className="absolute inset-0 -z-10 h-full w-full object-cover"
-        placeholder="blur"
-        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAMElEQVR4nGOobKkNiYuuqy/LyEllOHl4y4Rt5958+3L51A4GMRG+zrlz+WWlGdgZAXMqEP1lvGBIAAAAAElFTkSuQmCC"
-        fill
-        priority
-      />
-      <div className="absolute inset-0 -z-10 h-full w-full bg-gray-900/70" />
+      {mounted && (width > 1024 ? (
+        <div className="absolute h-[50vw] w-[50vw] right-0 top-1/2 -translate-y-1/2 z-10">
+          <ThreeD />
+        </div>
+      ) : (
+        <Image
+          src="/unsplash.webp"
+          alt=""
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAMElEQVR4nGOobKkNiYuuqy/LyEllOHl4y4Rt5958+3L51A4GMRG+zrlz+WWlGdgZAXMqEP1lvGBIAAAAAElFTkSuQmCC"
+          fill
+          priority
+        />
+      ))}
+
+      <div className="absolute inset-0 -z-20 h-full w-full bg-gray-900/70" />
       <div
         className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
         aria-hidden="true"
-      >
-        
-      </div>
+      ></div>
       <div
         className="absolute -top-52 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu"
         aria-hidden="true"
@@ -52,7 +71,7 @@ export default function Header() {
         />
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:mx-0">
+        <div className="mx-auto max-w-2xl lg:mx-0 relative">
           <motion.h2
             variants={sentence}
             initial="hidden"

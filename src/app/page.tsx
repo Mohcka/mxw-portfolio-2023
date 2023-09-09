@@ -1,18 +1,21 @@
 import DynamicIcon from "@/components/DynamicIcon";
 import About from "@/components/about";
-import Cgi from "@/components/cgi";
 import Contact from "@/components/contact";
 import Experience from "@/components/experience";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
 import Projects from "@/components/projects";
 import { Separator } from "@/components/shadcn/ui/separator";
-import TechList from "@/components/tech-stack";
+// import TechList from "@/components/tech-stack";
 import PerformanceSection from "@/components/PerformanceSection";
 import ThemeChanger from "@/components/theme-changer";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { Suspense } from "react";
+import dynamic from "next/dynamic";
+
+const TechList = dynamic(() => import("@/components/tech-stack"));
+
+
 
 export default function Home() {
   return (
