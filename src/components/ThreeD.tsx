@@ -170,7 +170,7 @@ const ThreeD = (props: Props) => {
   return (
     <>
       <Canvas shadows>
-        {/* <OrbitControls /> */}
+        <OrbitControls />
         <ambientLight intensity={0.5} />
         <pointLight intensity={30} position={[1.5, 1.5, 1.5]} />
         {/* Place a sphere at the same point as he light */}
