@@ -41,23 +41,24 @@ export default function Header() {
 
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 py-24  lg:py-72">
-      {/* {mounted && (width > 1024 ? (
-        <div className="absolute h-[50vw] w-[50vw] right-0 top-1/2 -translate-y-1/2 z-10">
-          <ThreeD />
-        </div>
-      ) : (
-        <Image
-          src="/unsplash.webp"
-          alt=""
-          className="absolute inset-0 -z-20 h-full w-full object-cover"
-          placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAMElEQVR4nGOobKkNiYuuqy/LyEllOHl4y4Rt5958+3L51A4GMRG+zrlz+WWlGdgZAXMqEP1lvGBIAAAAAElFTkSuQmCC"
-          fill
-          priority
-        />
-      ))} */}
+      {mounted &&
+        (isAboveLg ? (
+          <div className="absolute h-[50vw] w-[50vw] right-0 top-1/2 -translate-y-1/2 z-10">
+            <ThreeD />
+          </div>
+        ) : (
+          <Image
+            src="/unsplash.webp"
+            alt=""
+            className="absolute inset-0 -z-20 h-full w-full object-cover"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAMElEQVR4nGOobKkNiYuuqy/LyEllOHl4y4Rt5958+3L51A4GMRG+zrlz+WWlGdgZAXMqEP1lvGBIAAAAAElFTkSuQmCC"
+            fill
+            priority
+          />
+        ))}
 
-      {isAboveLg && (
+      {false && (
         <div className="absolute -bottom-48 h-[100vw] w-[100vw]  left-1/2 -translate-x-1/2 lg:bottom-0 lg:h-[50vw] lg:w-[50vw] lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:left-auto lg:translate-x-0 -z-10">
           <ThreeD />
         </div>
@@ -118,7 +119,7 @@ export default function Header() {
           </motion.p>
         </div>
       </div>
-      {isBelowLg && (
+      {false && (
         <div className="relative -z-10">
           <div className="-mt-20 -mb-24 sm:-my-48 h-[100vw] w-[100vw] ">
             <ThreeD />
