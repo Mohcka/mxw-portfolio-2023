@@ -10,6 +10,7 @@ import { GLTF } from "three-stdlib";
 import { useLoader } from "@react-three/fiber";
 import { motion } from "framer-motion-3d";
 import { Variants } from "framer-motion";
+import { followUpAnimationDelay } from "@/data/constants";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -49,7 +50,6 @@ export function Model(
 
   const { videoTexture } = props;
 
-
   // const videoURL = "videos/Sprite_Fright.webm";
 
   // const video = useMemo(() => {
@@ -65,25 +65,28 @@ export function Model(
   // const videoTexture = useMemo(() => new THREE.VideoTexture(video), [video]);
   // videoTexture.flipY = false;
 
-  const videoMaterial = useMemo(
-    () =>
-      new THREE.MeshStandardMaterial({
-        map: videoTexture,
-        emissiveMap: videoTexture,
-        side: THREE.DoubleSide,
-      }),
-    [videoTexture]
-  );
+  // const videoMaterial = useMemo(
+  //   () =>
+  //     new THREE.MeshStandardMaterial({
+  //       map: videoTexture,
+  //       emissiveMap: videoTexture,
+  //       side: THREE.DoubleSide,
+  //     }),
+  //   [videoTexture]
+  // );
+
+  const animationDelay = useMemo(() => followUpAnimationDelay, []);
 
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.phone_base.geometry} 
-      // material={phoneMaterial}
+      <mesh
+        geometry={nodes.phone_base.geometry}
+        // material={phoneMaterial}
       >
         <motion.meshPhongMaterial
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
+          transition={{ delay: animationDelay + 0.35  }}
           map={texture}
           specularMap={specularMap}
         />
@@ -96,7 +99,7 @@ export function Model(
         <motion.meshPhongMaterial
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
+          transition={{ delay: animationDelay + 0.35  }}
           map={videoTexture}
           emissiveMap={videoTexture}
         />

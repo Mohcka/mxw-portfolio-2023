@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const tailwindConfig: import("tailwindcss").Config = {
   future: {
     hoverOnlyWhenSupported: true,
   },
@@ -61,11 +61,13 @@ module.exports = {
       },
       keyframes: {
         "accordion-down": {
+          // @ts-ignore
           from: { height: 0 },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
+          // @ts-ignore
           to: { height: 0 },
         },
       },
@@ -78,3 +80,5 @@ module.exports = {
 
   plugins: [require("tailwindcss-animate")],
 };
+
+export default tailwindConfig;

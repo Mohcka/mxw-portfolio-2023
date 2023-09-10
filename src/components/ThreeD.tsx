@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, MeshProps, useFrame, useThree } from "@react-three/fiber";
-import React, { Suspense, useMemo } from "react";
+import React, { Suspense, useEffect, useMemo } from "react";
 import { useRef, useState } from "react";
 import { Model } from "@/components/Models/T";
 import { motion } from "framer-motion-3d";
@@ -11,6 +11,8 @@ import { Model as VRHeadset } from "@/components/Models/VRHeadset";
 import { type Variants } from "framer-motion";
 import * as THREE from "three";
 import { OrbitControls } from "@react-three/drei";
+import { useBreakpoint } from "@/hooks/breakpoints";
+import { followUpAnimationDelay } from "@/data/constants";
 
 function degrees_to_radians(degrees: number) {
   var pi = Math.PI;
@@ -46,109 +48,9 @@ const cgiVariants: Variants = {
   },
 };
 
-function Box(props: MeshProps) {
-  // This reference will give us direct access to the mesh
-  const meshRef = useRef<THREE.Mesh>();
-  // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(false);
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (meshRef.current!.rotation.x += delta));
-  // Return view, these are regular three.js elements expressed in JSX
-  return (
-    <mesh
-      {...props}
-      // @ts-ignore
-      ref={meshRef}
-      scale={active ? 1.5 : 1}
-      onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
-    </mesh>
-  );
-}
-
-function Sphere(props: MeshProps) {
-  // This reference will give us direct access to the mesh
-  const meshRef = useRef<THREE.Mesh>();
-  // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(false);
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  // useFrame((state, delta) => (meshRef.current!.rotation.x += delta));
-  // Return view, these are regular three.js elements expressed in JSX
-  return (
-    <motion.mesh
-      // @ts-ignore
-      ref={meshRef}
-      {...props}
-      scale={active ? 1.5 : 1}
-      animate={["floating"]}
-      variants={{
-        floating: {
-          z: [-1, 1],
-          transition: {
-            delay: 4,
-            z: {
-              duration: 3,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            },
-          },
-        },
-      }}
-      onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}
-    >
-      <sphereGeometry args={[1, 32, 32]} />
-      <meshNormalMaterial />
-    </motion.mesh>
-  );
-}
-
-function Cube(props: MeshProps) {
-  // This reference will give us direct access to the mesh
-  const meshRef = useRef<THREE.Mesh>();
-  // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(false);
-  // Return view, these are regular three.js elements expressed in JSX
-  return (
-    <motion.mesh
-      // @ts-ignore
-      ref={meshRef}
-      {...props}
-      scale={active ? 1.5 : 1}
-      animate={["floating"]}
-      variants={{
-        floating: {
-          z: [-1, 1],
-          transition: {
-            z: {
-              duration: 3,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            },
-          },
-        },
-      }}
-      onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshPhongMaterial />
-    </motion.mesh>
-  );
-}
-
 const ThreeD = (props: Props) => {
+  const { isAboveSm } = useBreakpoint("sm");
+  const { isAboveLg } = useBreakpoint("lg");
   const videoURL = "videos/slideshow.webm";
 
   const video = useMemo(() => {
@@ -167,19 +69,25 @@ const ThreeD = (props: Props) => {
     return texture;
   }, [video]);
 
+  const sceneScale = 0.5;
+
+  const animationDelay = useMemo(() => {
+    return followUpAnimationDelay;
+  }, []);
+
   return (
     <>
       <Canvas shadows>
-        <OrbitControls enableZoom={false} />
+        {isAboveLg && <OrbitControls enableZoom={false} />}
         <ambientLight intensity={0.5} />
-        <pointLight intensity={30} position={[1.5, 1.5, 1.5]} />
+        <pointLight intensity={70} position={[1.5, 1.5, 1.5]} />
         {/* Place a sphere at the same point as he light */}
         {/* <mesh position={[1.5, 1.5, 1.5]}>
         <sphereGeometry args={[0.1, 32, 32]} />
       </mesh> */}
         <motion.group
           rotation={[Math.PI / 2, 0, 0]}
-          position={[0, -1, -2]}
+          position={[-0.2, -1, -2]}
           initial={{ rotateZ: 0 }}
           animate={["rotating"]}
           variants={{
@@ -206,7 +114,7 @@ const ThreeD = (props: Props) => {
         <Cube position={[1.5, 0, 0.55]} /> */}
           {/* <Model position={[0, 1, -0.5]} /> */}
           <Suspense fallback={null}>
-            <motion.group scale={0.7}>
+            <motion.group scale={isAboveSm ? 0.7 : 0.8}>
               <motion.group
                 position={[0, -1.5, -0.5]}
                 initial={{
@@ -219,7 +127,7 @@ const ThreeD = (props: Props) => {
                   type: "spring",
                   stiffness: 50,
                   damping: 7,
-                  delay: 0.7,
+                  delay: animationDelay + 0.2,
                 }}
               >
                 <Laptop
@@ -244,7 +152,7 @@ const ThreeD = (props: Props) => {
                   type: "spring",
                   stiffness: 50,
                   damping: 7,
-                  delay: 0.9,
+                  delay: animationDelay + 0.4,
                 }}
               >
                 <Phone
@@ -266,7 +174,7 @@ const ThreeD = (props: Props) => {
                   type: "spring",
                   stiffness: 50,
                   damping: 7,
-                  delay: 0.5,
+                  delay: animationDelay,
                 }}
               >
                 <VRHeadset

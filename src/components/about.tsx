@@ -12,6 +12,8 @@ import {
 import Image from "next/image";
 import { Container } from "@/components/Container";
 import { motion } from "framer-motion";
+import { followUpAnimationDelay } from "@/data/constants";
+import { useMemo } from "react";
 
 function SocialLink({
   className,
@@ -56,12 +58,14 @@ export const metadata = {
 };
 
 export default function About() {
+  const animationDelay = useMemo(() => followUpAnimationDelay, []);
+
   return (
     <Container className="lg:my-16 mb-8 -mt-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2.5, duration: 0.5 }}
+        transition={{ delay: animationDelay, duration: 0.5 }}
         className="
         grid
         grid-cols-1

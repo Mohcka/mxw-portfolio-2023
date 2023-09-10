@@ -4,7 +4,9 @@ import { Variants, motion } from "framer-motion";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useViewportSize } from "@mantine/hooks";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useBreakpoint } from "@/hooks/breakpoints";
+import { followUpAnimationDelay } from "@/data/constants";
 
 const ThreeD = dynamic(() => import("@/components/ThreeD"), { ssr: false });
 
@@ -27,17 +29,19 @@ const letterVariants: Variants = {
 
 export default function Header() {
   const [mounted, setMounted] = useState(false);
-  const { width } = useViewportSize();
+  const { isAboveLg, isBelowLg } = useBreakpoint("lg");
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  const animationDelay = useMemo(() => followUpAnimationDelay, []);
+
   // if (!mounted) return null;
 
   return (
-    <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-72">
-      {mounted && (width > 1024 ? (
+    <div className="relative isolate overflow-hidden bg-gray-900 py-24  lg:py-72">
+      {/* {mounted && (width > 1024 ? (
         <div className="absolute h-[50vw] w-[50vw] right-0 top-1/2 -translate-y-1/2 z-10">
           <ThreeD />
         </div>
@@ -51,7 +55,13 @@ export default function Header() {
           fill
           priority
         />
-      ))}
+      ))} */}
+
+      {isAboveLg && (
+        <div className="absolute -bottom-48 h-[100vw] w-[100vw]  left-1/2 -translate-x-1/2 lg:bottom-0 lg:h-[50vw] lg:w-[50vw] lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:left-auto lg:translate-x-0 -z-10">
+          <ThreeD />
+        </div>
+      )}
 
       <div className="absolute inset-0 -z-20 h-full w-full bg-gray-900/70" />
       <div
@@ -59,7 +69,7 @@ export default function Header() {
         aria-hidden="true"
       ></div>
       <div
-        className="absolute -top-52 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu"
+        className="absolute -top-52 left-1/2 -z-20 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu"
         aria-hidden="true"
       >
         <div
@@ -101,13 +111,22 @@ export default function Header() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2.5 }}
+            transition={{ delay: animationDelay }}
             className="mt-6 text-2xl leading-8 text-gray-200"
           >
             Pushing boundaries, one project at a time.
           </motion.p>
         </div>
       </div>
+      {isBelowLg && (
+        <div className="relative -z-10">
+          <div className="-mt-20 -mb-24 sm:-my-48 h-[100vw] w-[100vw] ">
+            <ThreeD />
+          </div>
+          {/* Used to fix issue where a user can't scroll while tapping over the canvas */}
+          <div className="absolute w-full h-full top-0 left-0"></div>
+        </div>
+      )}
     </div>
   );
 }
