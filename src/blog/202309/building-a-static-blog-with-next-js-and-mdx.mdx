@@ -1,0 +1,440 @@
+---
+title: "Create a Blog with Next.js 13 and MDX (with Syntax Highlighting)"
+description: "Learn how to integrate MDX with Next.js 13 in this straightforward guide."
+date: 2023-09-26
+---
+
+In the realm of web development, Next.js 13 has emerged as a beacon of innovation, offering developers a
+streamlined approach to building high-performance, scalable applications. This guide delves into the intricacies of
+harnessing Next.js alongside the expressive power of MDX and the design finesse of TailwindCSS to craft a
+state-of-the-art blogging platform. Throughout this guide, we'll delve deep into the transformative power of Next.
+js. As we progress, you'll witness how Next.js goes beyond traditional frameworks, offering a unique blend of
+performance and creativity.
+
+Find the complete app in this [repo](https://github.com/Mohcka/nextjs-13-mdx-blog-w-syntax-highlighting-example)
+
+### Prerequisites for Following Along
+
+Before diving into this walkthrough it's suggested that you have a basic understanding of [React](https://react.dev/learn), [Next.js](https://nextjs.org/learn/basics/create-nextjs-app) and [Typescript](https://www.freecodecamp.org/news/learn-typescript-in-5-minutes-13eda868daeb).
+
+I'll be using pnpm as my package manager of choice, but you can use npm or yarn if you prefer. Just make sure to look up the equivalent commands for your package manager of choice.
+
+### Setting Up Your Next.js Project
+
+Run the following command to create a new Next.js project.
+
+```bash
+pnpm dlx create-next-app@latest my-little-experiment
+```
+
+You don't have to follow this exactly, but this is the configuration I used for creating the app:
+
+![Next.js Project Setup](/blog/2023/09/app-config.png)
+
+Next, add the following dependencies to your project.
+
+```bash
+pnpm add next-mdx-remote gray-matter
+pnpm add -D @tailwindcss/typography
+```
+
+This will equip your project with MDX support in Next.js `next-mdx-remote`, metadata parsing capabilities for MDX files `gray-matter`, and typography utilities for TailwindCSS `@tailwindcss/typography`.
+
+You'll need to configure your tailwind.config.js file to include the typography plugin.
+
+```javascript
+// tailwind.config.ts
+const tailwindConfig: import("tailwindcss").Config = {
+  ...
+  plugins: [..., require('@tailwindcss/typography')],
+  ...
+}
+```
+
+Make sure to update your globals.css and remove any unnecessary styles and just keep your tailwind directives:
+
+```css
+// app/globals.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### Crafting Your First Blog Post
+
+Create a new directory in the root of your project called `blogs` and from there create a new file called `my-first-blog.mdx` and add the following content.
+
+````markdown
+---
+title: My First Blog
+date: 2023-09-26
+description: Hello, from my first blog post!
+---
+
+Welcome to my blog! Check out this code example:
+
+```javascript
+function greet() {
+  console.log("Hello, world!");
+}
+```
+````
+
+The metadata at the top of the within the `---` is is called [frontmatter](https://daily-dev-tips.com/posts/what-exactly-is-frontmatter/) which is being parsed by the `gray-matter` package we installed earlier. This will allow us to access the metadata within our MDX files.
+
+### Creating a Blogs Listing
+
+Before we start creating a page to list our blogs, it would be a good idea to create a function that will fetch the list of blog posts from your source (in this case it's in our codebase under /blogs) as we'll need to reuse this logic a couple of times. let's create a new directory called `lib` in the root of our project and create a new file called `utils.ts` and add the following code.
+
+```tsx
+// lib/utils.ts
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+
+export const getBlogs = (dir: string) => {
+  // Get all files in a directory
+  // We'll use this to get our files in the /blogs directory
+  const files = fs.readdirSync(path.join(dir));
+
+  // This will return an array of objects with the markdown file's metaData, it's slug and it's content
+  const blogs = files.map((filename) => {
+    const fileContent = fs.readFileSync(path.join(dir, filename), "utf-8");
+
+    const { data: frontMatter, content } = matter(fileContent);
+
+    return {
+      meta: frontMatter,
+      slug: filename.replace(".mdx", ""),
+      content,
+    };
+  });
+
+  return blogs;
+};
+```
+
+Now we can create a new new directory in your app router called `/blogs` and create a new page.tsx file within it to render our list of blog pages.
+
+```tsx
+// app/blogs/page.tsx
+import { getBlogs } from "@/lib/utils";
+import Link from "next/link";
+
+export default function BlogsPage() {
+  const blogs = getBlogs("blogs");
+
+  return (
+    div className="m-4">
+      <h1 className="text-2xl font-bold">Blog</h1>
+      <div className="my-2">
+        {blogs.map((blog) => (
+          <div key={blog.slug} className="my-10">
+            <div className="text-xl font-semibold">
+              <Link href={`blogs/${blog.slug}`}>{blog.meta.title}</Link>
+            </div>
+            <div className="text-xs">{blog.meta.date.toDateString()} </div>
+            <div>{blog.meta.description}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+And you should have something like this:
+
+![Blogs Listing](/blog/2023/09/blog-page.png)
+
+Now if you try to click on one of the links you'll most likely run into a 404. So now would be the time to start fleshng out the actual blog page. Within `app/blogs` create a new directory called `[slug]` where we'll create our new page.tsx file.
+
+the file structure should look like this:
+
+```
+app
+└───blogs
+    └───[slug]
+        └───page.tsx
+```
+
+If we were to just call our url `/blogs/my-first-blog`, next.js will render the page server side which at times can be slow. Instead we'll be using `generateStaticParams` which will allow us to dynamically generate static pages at build time by passing an array of slugs to each of our pages so that next.js will have the context it needs to find and populate each page with our blog data. This will allow us to have a faster page load times, improving the user experience.
+
+```tsx
+// app/blogs/[slug]/page.tsx
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { getBlogs } from "@/lib/utils";
+
+type Props = {
+  params: { slug: string; };
+};
+
+
+export async function generateStaticParams() {
+  const blogDir = "blog";
+
+  const blogs = getBlogs(blogDir);
+
+  const slugs = blogs.map((blog) => ({
+    slug: blog.slug,
+  }));
+
+  // each slug object in the array will be passed to the params of each statically generated page
+  // like this:
+  // [
+  // { params: { slug: "my-first-blog" } },
+  // { params: { slug: "my-second-blog" } },
+  // ...
+  // ]
+  return slugs;
+}
+```
+
+Now we just have to take our slugs generated from `generateStaticParams`  and find the blog that matches the slug to render our page at build time.
+```tsx
+// app/blogs/[slug]/page.tsx
+const BlogPage = ({ params: { slug } }: Props) => {
+  const blogFile = fs.readFileSync(
+    path.join("src/blog", slug + ".mdx"),
+    "utf8"
+  );
+
+  const { content, data: frontMatter } = matter(blogFile);
+
+  const options = {
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [],
+    },
+  };
+
+  return (
+    <article className="prose prose-sm md:prose-base lg:prose-lg prose-slate mx-auto">
+      <div>
+        <Link href="/blogs">&lt; Blogs</Link>
+      </div>
+      <h1 className="pt-10">{frontMatter.title}</h1>
+
+      <MDXRemote source={content} options={options} />
+    </article>
+  );
+};
+
+export default BlogPage;
+```
+
+The main thing to focus on here is MDXRemote which will render our markdown content and any components we pass to it. You'll also notice we have an options object being passed into our component.  This is useful for configuring how you want your markdown to be rendered. In this case we're using `remark-gfm` as a plugin which will allow us to use github flavored markdown.
+
+And finally we have our blog page:
+
+![Blog Page](/blog/2023/09/blog-post.png)
+
+### Adding a Custom MDX Component
+
+Now that we have our blog page rendering our markdown content, let's add a custom component to our blog post. Create a new directory called `components` in the root of your project and create a new file called `counter.tsx` and add the following code:
+
+```tsx
+// components/counter.tsx
+
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <div>Count: {count}</div>
+    </div>
+  );
+}
+```
+
+Now we can add this component into our blog post and use it like so:
+
+````markdown
+---
+title: My First Blog
+date: 2023-09-26
+description: Hello, from my first blog post!
+---
+
+Welcome to my blog! Check out this code example:
+
+```javascript
+function greet() {
+  console.log("Hello, world!");
+}
+```
+
+<Counter />
+````
+
+And voila! You should have a working counter component in your blog post.
+
+![Counter Component](/blog/2023/09/blog-post-w-mdx-component.png)
+
+### Adding Syntax Highlighting
+
+Congratulations! You've completed setup for your blog.  However, our embedded code blocks feel a bit bland and may be hard to read without some proper syntax highlighting.   Luckily there exists a plugin, [rehype-highlght](), that can help us with that.  Let's install it and add some necessary elements needed to make it work.
+
+```bash
+pnpm add rehype-highlight
+```
+
+Since `rehype-highlight` uses hightlight.js in the background we'll need to add the necessary styles.  And fortunately for us hightlight.js provides a wide range of preconfigured stylesheets for us to download and use.  You can [find them here](https://github.com/highlightjs/highlight.js/tree/main/src/styles)
+
+I've chosen to use the `atom-one-dark` stylesheet but what you choose is up to you.  Take your downloaded stylesheet and add it to your `/app` directory.  
+
+```css
+// app/atom-one-dark.css
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+
+.hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+```
+
+Because we're using tailwind, it'll cause some conflict with our new stylesheet.  To fix this change this section of code:
+
+```css
+.hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+```
+
+to this:
+
+```css
+pre:has(.hljs), .hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+```
+
+Finally, in our blog post page `/app/blogs/[slug]/page.tsx`  we'll need to import our stylesheet and add the `rehype-highlight` plugin to our options object.
+
+```tsx
+// app/blogs/[slug]/page.tsx
+...
+import rehypeHighlight from "rehype-highlight";
+
+import "../../atomic-dark.css";
+...
+const options = {
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [rehypeHighlight],
+    },
+  };
+...
+<MDXRemote source={content} options={options} components={{ Counter }} />
+```
+
+![Syntax Highlighting](/blog/2023/09/blog-post-w-syntax-highlighting.png)
+
+Side note:  After adding the `rehype-highlight` plugin, typescript started to complain that there was an issue with my options object from the MDXRemote component.  However, there is nothing wrong with the implementation from what I've seen and the page will still render without a hitch.  If this happens to use try ignoring the error by adding `// @ts-ignore` above the line that's causing the error.
+
+```tsx
+// app/blogs/[slug]/page.tsx
+...
+{/* @ts-ignore */}
+<MDXRemote source={content} options={options} components={{ Counter }} />
+...
+```
+### Conclusion
+
+And that's it!  You've successfully created a blog with Next.js 13 and MDX.  If you run into any issues with the code above or the provided [repo](https://github.com/Mohcka/nextjs-13-mdx-blog-w-syntax-highlighting-example) please feel free to [submit an issue](https://github.com/Mohcka/nextjs-13-mdx-blog-w-syntax-highlighting-example/issues)!  I hope you found this guide helpful and I look forward to seeing what you create with Next.js and MDX!
